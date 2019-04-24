@@ -22,6 +22,10 @@ class StarterApplicationTests {
 
 	@Test
 	fun contextLoads() {
+		val m = mapOf("key1" to 1, "key2" to 2, "key3" to 3)
+		for ( (k,v) in m ) {
+			println("key = $k value = $v")
+		}
 		logger.debug(cachingConnectionFactoryCA.toString())
 		logger.debug("test")
 	}
