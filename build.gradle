@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 plugins {
 	id 'org.jetbrains.kotlin.plugin.jpa' version '1.2.71'
 	id 'org.springframework.boot' version '2.1.4.RELEASE'
@@ -5,7 +7,13 @@ plugins {
 	id 'org.jetbrains.kotlin.plugin.spring' version '1.2.71'
 }
 
+configurations {
+    wsdl
+}
+
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'idea'
+apply plugin: 'kotlin'
 
 group = 'com.ovalinfo'
 version = '0.0.1-SNAPSHOT'
@@ -15,10 +23,83 @@ repositories {
 	mavenCentral()
 }
 
+task gencxf {
+    ext.sourcesDir = "${buildDir}/generated-sources/cxf"
+    ext.classesDir = "${buildDir}/classes/cxf"
+    ext.schemaDir = "${projectDir}/src/main/resources/wsdl"
+
+    outputs.dir classesDir
+
+    doFirst() {
+        project.ant {
+            taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+                    classpath: configurations.wsdl.asPath
+            mkdir(dir: sourcesDir)
+            mkdir(dir: classesDir)
+        }
+    }
+    if (file(schemaDir).listFiles()) {
+        inputs.files file(schemaDir).listFiles()
+        outputs.files file(sourcesDir)
+        doLast() {
+            file(schemaDir).listFiles().findAll {it.name.endsWith('.wsdl')}.each {
+                i-> println "generating from file " + i.name
+                    println "${schemaDir}/${i.name}"
+                    javaexec {
+                        classpath configurations.wsdl
+                        main = 'org.apache.cxf.tools.wsdlto.WSDLToJava'
+                        args =  ['-xjc','-wsdlLocation',"${schemaDir}/", '-d', "${sourcesDir}", "${schemaDir}/${i.name}"]
+                                systemProperties = ['exitOnFinish':'TRUE']
+                    }
+            }
+            project.ant {
+                taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+                        classpath: configurations.wsdl.asPath
+                javac(destdir: classesDir, source: 1.8, target: 1.8, debug: true,
+                        debugLevel: "lines,vars,source",
+                        classpath: configurations.wsdl.asPath,
+                        includeantruntime: "false") {
+                    src(path: sourcesDir)
+                    include(name: "**/*.java")
+                    include(name: "*.java")
+                }
+
+                copy(todir: classesDir) {
+                    fileset(dir: sourcesDir, erroronmissingdir: false) {
+                        exclude(name: "**/*.java")
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 dependencies {
+        wsdl "org.apache.cxf:cxf-tools:3.0.4"
+        wsdl "org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:3.0.4"
+        wsdl "org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:3.0.4"
+        wsdl "org.apache.cxf:cxf-rt-transports-jms:3.0.4"
+        wsdl "com.sun.xml.bind:jaxb-xjc:2.1.7"
+        wsdl "com.sun.xml.bind:jaxb-impl:2.1.7"
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
 	implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+        implementation "org.apache.cxf:cxf-tools:3.0.4"
+        implementation "org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:3.0.4"
+        implementation "org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:3.0.4"
+        implementation "org.apache.cxf:cxf-rt-transports-jms:3.0.4"
+        implementation "com.sun.xml.bind:jaxb-xjc:2.1.7" 
+        implementation (files(gencxf.classesDir).builtBy(gencxf))
+        implementation group: 'javax.jms', name: 'javax.jms-api', version: '2.0-b07'
+        implementation group: 'com.tibco', name: 'tibjms', version: '8.3.0'
+        implementation group: 'org.springframework', name: 'spring-core', version: '4.3.2.RELEASE'
+        implementation group: 'org.springframework', name: 'spring-beans', version: '4.3.2.RELEASE'
+        implementation group: 'org.springframework', name: 'spring-context', version: '4.3.2.RELEASE'
+        implementation group: 'org.springframework', name: 'spring-jms', version: '4.3.2.RELEASE'
+        implementation group: 'org.springframework', name: 'spring-test', version: '4.3.2.RELEASE'       
+	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -35,3 +116,13 @@ compileTestKotlin {
 		jvmTarget = '1.8'
 	}
 }
+
+task afterEclipseImport {
+    dependsOn gencxf
+}
+
+jar {
+    from sourceSets.main.allSource
+    version version
+}
+
