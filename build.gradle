@@ -21,6 +21,9 @@ sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+    maven {
+        url "https://mvnrepository.com/artifact/com.tibco"
+    }
 }
 
 task gencxf {
@@ -94,6 +97,7 @@ dependencies {
         implementation (files(gencxf.classesDir).builtBy(gencxf))
         implementation group: 'javax.jms', name: 'javax.jms-api', version: '2.0-b07'
         implementation group: 'com.tibco', name: 'tibjms', version: '8.3.0'
+
         implementation group: 'org.springframework', name: 'spring-core', version: '4.3.2.RELEASE'
         implementation group: 'org.springframework', name: 'spring-beans', version: '4.3.2.RELEASE'
         implementation group: 'org.springframework', name: 'spring-context', version: '4.3.2.RELEASE'
