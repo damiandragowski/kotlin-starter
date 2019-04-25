@@ -30,6 +30,20 @@ class StarterApplicationTests {
 		for ( (index,value) in l.withIndex() ) {
 			println("" + index + " value = " +value)
 		}
+
+		l.let {
+			it.size
+		}.let {
+			println(it)
+		}
+
+		l.also {
+			it.reversed()
+		}.also {
+			println(it)
+		}
+
+
 		logger.debug(cachingConnectionFactoryCA.toString())
 		logger.debug("test")
 	}
