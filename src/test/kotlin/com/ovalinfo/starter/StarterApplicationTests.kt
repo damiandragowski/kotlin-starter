@@ -20,6 +20,10 @@ class StarterApplicationTests {
 	@Autowired
 	private lateinit var cachingConnectionFactoryCA: CachingConnectionFactory
 
+	val queueName by lazy {
+		cachingConnectionFactoryCA.toString()
+	}
+
 	@Test
 	fun contextLoads() {
 		val m = mapOf("key1" to 1, "key2" to 2, "key3" to 3)
@@ -43,8 +47,7 @@ class StarterApplicationTests {
 			println(it)
 		}
 
-
-		logger.debug(cachingConnectionFactoryCA.toString())
+		logger.debug(queueName)
 		logger.debug("test")
 	}
 
