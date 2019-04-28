@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class StarterApplication
 
 fun main(args: Array<String>) {
-	runApplication<StarterApplication>(*args)
+    runApplication<StarterApplication>(*args)
 }

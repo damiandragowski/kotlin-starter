@@ -15,40 +15,41 @@ import org.springframework.test.context.web.WebAppConfiguration
 @WebAppConfiguration
 class StarterApplicationTests {
 
-	companion object : KLogging()
+    companion object : KLogging()
 
-	@Autowired
-	private lateinit var cachingConnectionFactoryCA: CachingConnectionFactory
+    @Autowired
+    private lateinit var cachingConnectionFactoryCA: CachingConnectionFactory
 
-	val queueName by lazy {
-		cachingConnectionFactoryCA.toString()
-	}
+    val queueName by lazy {
+        cachingConnectionFactoryCA.toString()
+    }
 
-	@Test
-	fun contextLoads() {
-		val m = mapOf("key1" to 1, "key2" to 2, "key3" to 3)
-		val l = listOf(2,2,3,5,5)
-		for ( (k,v) in m ) {
-			println("key = $k value = $v")
-		}
-		for ( (index,value) in l.withIndex() ) {
-			println("" + index + " value = " +value)
-		}
+    @Test
+    fun contextLoads() {
+        val m = mapOf("key1" to 1, "key2" to 2, "key3" to 3)
+        val l = listOf(2, 2, 3, 5, 5)
+        for ((k, v) in m) {
+            println("key = $k value = $v")
+        }
+        for ((index, value) in l.withIndex()) {
+            println("" + index + " value = " + value)
+        }
 
-		l.let {
-			it.size
-		}.let {
-			println(it)
-		}
+        l.let {
+            it.size
+        }.let {
+            println(it)
+        }
 
-		l.also {
-			it.reversed()
-		}.also {
-			println(it)
-		}
+        l.also {
+            it.reversed()
+        }.also {
+            println(it)
+        }
 
-		logger.debug(queueName)
-		logger.debug("test")
-	}
+
+        logger.debug(queueName)
+        logger.debug("test")
+    }
 
 }

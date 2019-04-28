@@ -1,10 +1,10 @@
 package com.ovalinfo.starter.jms
 
+import com.tibco.tibjms.TibjmsConnectionFactory
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.PropertySource
-import com.tibco.tibjms.*
-import org.springframework.context.annotation.Bean
 import org.springframework.jms.connection.CachingConnectionFactory
 
 
@@ -24,7 +24,7 @@ open class TibcoJms {
     var jmsPass: String? = null
 
     @Bean
-    open  fun targetConnectionFactory(): TibjmsConnectionFactory  {
+    open fun targetConnectionFactory(): TibjmsConnectionFactory {
         val factory = TibjmsConnectionFactory(jmsHost)
         factory.setUserName(jmsUser)
         factory.setUserPassword(jmsPass)
@@ -35,7 +35,7 @@ open class TibcoJms {
      *   Client Access
      */
     @Bean
-    open fun cachingConnectionFactoryCA(targetConnectionFactory: TibjmsConnectionFactory) : CachingConnectionFactory {
+    open fun cachingConnectionFactoryCA(targetConnectionFactory: TibjmsConnectionFactory): CachingConnectionFactory {
         val cachingConnectionFactoryCA = CachingConnectionFactory()
         cachingConnectionFactoryCA.targetConnectionFactory = targetConnectionFactory
         cachingConnectionFactoryCA.sessionCacheSize = 20
@@ -47,7 +47,7 @@ open class TibcoJms {
      *   Provider Access
      */
     @Bean
-    open fun cachingConnectionFactoryPA(targetConnectionFactory: TibjmsConnectionFactory) : CachingConnectionFactory {
+    open fun cachingConnectionFactoryPA(targetConnectionFactory: TibjmsConnectionFactory): CachingConnectionFactory {
         val cachingConnectionFactoryPA = CachingConnectionFactory()
         cachingConnectionFactoryPA.targetConnectionFactory = targetConnectionFactory
         cachingConnectionFactoryPA.sessionCacheSize = 20

@@ -8,7 +8,7 @@ import org.springframework.jms.connection.CachingConnectionFactory
 
 @Configuration
 @PropertySource("classpath:/engine.properties")
-open class TibcoGenericCA<T>(val queueName : String, val type: Class<T>) {
+open class TibcoGenericCA<T>(val queueName: String, val type: Class<T>) {
 
 
     @Bean
@@ -40,7 +40,7 @@ open class TibcoGenericCA<T>(val queueName : String, val type: Class<T>) {
     }
 
     @Bean
-    @Scope( value="request", proxyMode= ScopedProxyMode.TARGET_CLASS)
+    @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
     open fun jaxWsProxyBean(jaxWsProxyFactoryBean: JaxWsProxyFactoryBean): T {
         return jaxWsProxyFactoryBean.create(type)
     }
