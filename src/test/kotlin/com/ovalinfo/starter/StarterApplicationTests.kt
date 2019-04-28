@@ -52,4 +52,28 @@ class StarterApplicationTests {
         logger.debug("test")
     }
 
+    @Test
+    fun `Some class test` () {
+        val s = SomeClass()
+        val s1 = if (s.str.startsWith("H")) {
+            println("if statement")
+            s.str } else {
+            println("else statement")
+            ""
+        }
+        logger.debug(s1)
+        s.str = "from test"
+        logger.debug(s.str)
+
+        val a:Short = 1 shl 2
+        logger.debug(a.toString())
+        var s2 = 1
+        outerLoop@ for ( i in 1..5 )
+            for ( j in 1..5 ) {
+                if ( i == 2 ) break@outerLoop
+                s2 = s2 shl 1
+            }
+        logger.debug(s2.toString())
+    }
+
 }
