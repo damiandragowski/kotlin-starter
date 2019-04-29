@@ -74,6 +74,15 @@ class StarterApplicationTests {
                 s2 = s2 shl 1
             }
         logger.debug(s2.toString())
+
+
+        val l1 = listOf(9,8,7,6,5,4,3,2,1)
+
+        l1.forEach label@{
+            if (it > 6) return@label
+
+        }
+        //val sss:SomeClass2 =  SomeClass2()
     }
 
 }
