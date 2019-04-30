@@ -1,5 +1,21 @@
 package com.ovalinfo.starter
 
+interface TestProperites {
+    val testInteger: Int
+}
+
+interface TestProperties2 : TestProperites {
+    val testAdd1: Int
+    val testAdd2: Int
+    override val testInteger :Int
+        get() = testAdd1 + testAdd2
+}
+
+class TestClassProperties(    override val testAdd1: Int,
+                              override val testAdd2: Int): TestProperties2 {
+
+}
+
 open class SomeClass {
     private var name: String
     var str : String

@@ -82,6 +82,9 @@ class StarterApplicationTests {
             if (it > 6) return@label
 
         }
+
+        val testClassProperties = TestClassProperties(1,2)
+        logger.debug ("outcome " + testClassProperties.testInteger)
         //val sss:SomeClass2 =  SomeClass2()
     }
 
