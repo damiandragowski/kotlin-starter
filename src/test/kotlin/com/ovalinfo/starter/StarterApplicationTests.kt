@@ -85,6 +85,15 @@ class StarterApplicationTests {
 
         val testClassProperties = TestClassProperties(1,2)
         logger.debug ("outcome " + testClassProperties.testInteger)
+
+        val l2 = mutableListOf(1, 2, 3, 4)
+
+        l2.swap(3,0)
+        l2.print()
+        logger.debug("bit size " + l2.bitsize)
+
+
+
         //val sss:SomeClass2 =  SomeClass2()
     }
 

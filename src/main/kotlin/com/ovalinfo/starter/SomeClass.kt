@@ -1,5 +1,8 @@
 package com.ovalinfo.starter
 
+import java.lang.StringBuilder
+import java.util.stream.Collectors
+
 interface TestProperites {
     val testInteger: Int
 }
@@ -32,3 +35,15 @@ open class SomeClass {
 abstract class SomeClass2 : SomeClass() {
     override abstract  fun test1()
 }
+
+fun MutableList<Int>.swap(index1: Int, index2: Int) {
+    this[index2] = this[index1].also { this[index1] = this[index2] }
+}
+
+inline fun <reified T: Any> MutableList<T>.print() {
+    println(this.map(Any::toString).fold(StringBuilder(), { sb,  it-> sb.append(it).append(",")} ).toString())
+}
+
+val <T> MutableList<T>.bitsize: Int
+    get() = this.size*8
+
