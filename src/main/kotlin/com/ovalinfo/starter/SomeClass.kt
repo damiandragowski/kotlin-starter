@@ -16,7 +16,7 @@ interface TestProperties2 : TestProperites {
 
 class TestClassProperties(    override val testAdd1: Int,
                               override val testAdd2: Int): TestProperties2 {
-
+    companion object  {}
 }
 
 open class SomeClass {
@@ -47,3 +47,15 @@ inline fun <reified T: Any> MutableList<T>.print() {
 val <T> MutableList<T>.bitsize: Int
     get() = this.size*8
 
+fun TestClassProperties.Companion.ten() = 10
+
+class DispatchSomeClass {
+    open fun test1() = println("test1 from dispatch class")
+    fun SomeClass.test2() {
+        test1()
+        this@DispatchSomeClass.test1()
+    }
+    fun callTest2(s : SomeClass) {
+        s.test2()
+    }
+}

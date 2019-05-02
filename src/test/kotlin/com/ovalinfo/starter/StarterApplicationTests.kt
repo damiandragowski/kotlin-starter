@@ -92,6 +92,8 @@ class StarterApplicationTests {
         l2.print()
         logger.debug("bit size " + l2.bitsize)
 
+        DispatchSomeClass().callTest2(SomeClass())
+
 
 
         //val sss:SomeClass2 =  SomeClass2()
