@@ -99,11 +99,10 @@ class StarterApplicationTests {
         test(BootClass.ClassicBoot("jagged"))
         //val sss:SomeClass2 =  SomeClass2()
     }
-    fun test(e : BootClass) {
+    fun test(e : BootClass):Unit =
         when(e) {
             is BootClass.ClassicBoot -> { e.test() }
             is BootClass.SmartBoot -> { println("SmartBoot") }
             is BootClass.EmptyBoot -> println("else")
         }
-    }
 }
