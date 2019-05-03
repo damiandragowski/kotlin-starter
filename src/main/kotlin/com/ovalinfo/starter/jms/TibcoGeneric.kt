@@ -3,6 +3,7 @@ package com.ovalinfo.starter.jms
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean
 import org.apache.cxf.transport.jms.JMSConfigFeature
 import org.apache.cxf.transport.jms.JMSConfiguration
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.*
 import org.springframework.jms.connection.CachingConnectionFactory
 
@@ -40,6 +41,7 @@ open class TibcoGenericCA<T>(val queueName: String, val type: Class<T>) {
     }
 
     @Bean
+    @Qualifier
     @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
     open fun jaxWsProxyBean(jaxWsProxyFactoryBean: JaxWsProxyFactoryBean): T {
         return jaxWsProxyFactoryBean.create(type)

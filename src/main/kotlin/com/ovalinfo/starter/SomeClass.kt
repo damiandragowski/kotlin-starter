@@ -59,3 +59,16 @@ class DispatchSomeClass {
         s.test2()
     }
 }
+
+// enum with special data
+sealed class BootClass {
+    object EmptyBoot: BootClass()
+    data class SmartBoot(val name: String=""): BootClass() {
+        fun test() { println("Hello from SmartBoot by $name")}
+    }
+    data class ClassicBoot(val trainName: String=""): BootClass() {
+        fun test() { println("Hello from ClassicBoot by $trainName")}
+    }
+}
+
+

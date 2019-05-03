@@ -1,6 +1,7 @@
 package com.ovalinfo.starter
 
 import com.ovalinfo.starter.jms.TibcoJms
+import com.ovalinfo.starter.model.Animal
 import mu.KLogging
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -93,10 +94,16 @@ class StarterApplicationTests {
         logger.debug("bit size " + l2.bitsize)
 
         DispatchSomeClass().callTest2(SomeClass())
-
-
-
+        val anim = Animal(nickname = "bob", age = 10)
+        logger.debug(anim.toString())
+        test(BootClass.ClassicBoot("jagged"))
         //val sss:SomeClass2 =  SomeClass2()
     }
-
+    fun test(e : BootClass) {
+        when(e) {
+            is BootClass.ClassicBoot -> { e.test() }
+            is BootClass.SmartBoot -> { println("SmartBoot") }
+            is BootClass.EmptyBoot -> println("else")
+        }
+    }
 }
