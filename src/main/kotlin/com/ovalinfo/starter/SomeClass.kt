@@ -18,6 +18,8 @@ class TestClassProperties(    override val testAdd1: Int,
                               override val testAdd2: Int): TestProperties2 {
     companion object  {}
 }
+// extension
+fun TestClassProperties.Companion.ten() = 10
 
 open class SomeClass {
     private var name: String
@@ -32,23 +34,12 @@ open class SomeClass {
     open fun test1() = println("test1")
 }
 
+// close for this method
 abstract class SomeClass2 : SomeClass() {
     override abstract  fun test1()
 }
 
-fun MutableList<Int>.swap(index1: Int, index2: Int) {
-    this[index2] = this[index1].also { this[index1] = this[index2] }
-}
-
-inline fun <reified T: Any> MutableList<T>.print() {
-    println(this.map(Any::toString).fold(StringBuilder(), { sb,  it-> sb.append(it).append(",")} ).toString())
-}
-
-val <T> MutableList<T>.bitsize: Int
-    get() = this.size*8
-
-fun TestClassProperties.Companion.ten() = 10
-
+// dispatch class for SomeClass extension reciever ,two test1 function, and use of this qualifier
 class DispatchSomeClass {
     open fun test1() = println("test1 from dispatch class")
     fun SomeClass.test2() {
@@ -71,4 +62,13 @@ sealed class BootClass {
     }
 }
 
+fun MutableList<Int>.swap(index1: Int, index2: Int) {
+    this[index2] = this[index1].also { this[index1] = this[index2] }
+}
 
+inline fun <reified T: Any> MutableList<T>.print() {
+    println(this.map(Any::toString).fold(StringBuilder(), { sb,  it-> sb.append(it).append(",")} ).toString())
+}
+
+val <T> MutableList<T>.bitsize: Int
+    get() = this.size*8

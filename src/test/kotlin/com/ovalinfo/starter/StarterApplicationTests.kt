@@ -99,6 +99,8 @@ class StarterApplicationTests {
         test(BootClass.ClassicBoot("jagged"))
         //val sss:SomeClass2 =  SomeClass2()
     }
+
+    // use sealed class as expresion
     fun test(e : BootClass):Unit =
         when(e) {
             is BootClass.ClassicBoot -> { e.test() }
