@@ -70,7 +70,7 @@ class StarterApplicationTests {
         logger.debug(a.toString())
         var s2 = 1
         outerLoop@ for ( i in 1..5 )
-            for ( j in 1..5 ) {
+            innerLook@ for ( j in 1..5 ) {
                 if ( i == 2 ) break@outerLoop
                 s2 = s2 shl 1
             }
@@ -97,9 +97,31 @@ class StarterApplicationTests {
         val anim = Animal(nickname = "bob", age = 10)
         logger.debug(anim.toString())
         test(BootClass.ClassicBoot("jagged"))
-        //val sss:SomeClass2 =  SomeClass2()
+
+
+        testing(SourceImpl("1"));
     }
 
+    interface Source<in V, out T> {
+        fun produce():T
+        fun consume(v : V):Int
+    }
+
+    class SourceImpl<V, T>(val t: T): Source<V, T> {
+        override fun produce(): T {
+            return t
+        }
+
+        override fun consume(v: V):Int {
+            return v.toString().length
+        }
+    }
+
+    fun testing(s : Source<Any, String>) {
+        val s2 : Source<String, Any> = s
+        println(s2.consume("testing"))
+        println(s2.produce())
+    }
     // use sealed class as expresion
     fun test(e : BootClass):Unit =
         when(e) {
