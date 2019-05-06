@@ -97,7 +97,7 @@ class StarterApplicationTests {
         val anim = Animal(nickname = "bob", age = 10)
         logger.debug(anim.toString())
         test(BootClass.ClassicBoot("jagged"))
-
+        logger.debug ( "" + fact(5))
 
         testing(SourceImpl("1"));
     }
@@ -129,4 +129,8 @@ class StarterApplicationTests {
             is BootClass.SmartBoot -> { println("SmartBoot") }
             is BootClass.EmptyBoot -> println("else")
         }
+
+    tailrec fun fact(i : Long, run :Long = 1): Long {
+        return if ( i == 1L ) run else fact(i-1, run*i)
+    }
 }
