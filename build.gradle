@@ -28,9 +28,9 @@ sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
-    flatDir {
-        dirs '/opt/tibco/ems/8.4/lib/'
-    }
+    //flatDir {
+     //   dirs '/opt/tibco/ems/8.4/lib/'
+    //}
 }
 
 task gencxf {
@@ -103,8 +103,8 @@ dependencies {
     implementation 'org.apache.cxf:cxf-rt-transports-jms:3.0.4'
     implementation 'com.sun.xml.bind:jaxb-xjc:2.1.7'
     implementation(files(gencxf.classesDir).builtBy(gencxf))
-
-    implementation name: 'tibjms'
+    implementation group: 'com.tibco', name: 'tibjms', version: '4.4.3'
+    //implementation name: 'tibjms'
     implementation "io.github.microutils:kotlin-logging:1.4"
 
     implementation group: 'org.springframework', name: 'spring-core', version: '4.3.2.RELEASE'
