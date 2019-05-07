@@ -4,8 +4,6 @@ jdk:
 before_script:
   - chmod +x gradlew
 script:
-  - ./gradlew clean build
-  - ./gradlew test
-  - ./gradlew jacocoTestReport
+  - ./gradlew clean build test jacocoTestReport
 after_success:
   - bash <(curl -s https://codecov.io/bash) -t acada2b9-8aa8-4f8d-b524-0a4f5b1d6807

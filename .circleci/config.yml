@@ -10,6 +10,6 @@ jobs:
           command: |
             ./gradlew clean build
       - run:
-          name: Build
+          name: Test
           command: |
-            ./gradlew test
+            ./gradlew clean test
