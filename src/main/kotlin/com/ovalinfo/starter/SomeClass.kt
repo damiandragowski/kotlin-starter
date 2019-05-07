@@ -3,6 +3,8 @@ package com.ovalinfo.starter
 import java.lang.StringBuilder
 import java.util.stream.Collectors
 
+typealias intList = ArrayList<Int>
+
 interface TestProperites {
     val testInteger: Int
 }

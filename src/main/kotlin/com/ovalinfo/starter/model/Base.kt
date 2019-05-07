@@ -1,5 +1,6 @@
 package com.ovalinfo.starter.model
 
+import com.ovalinfo.starter.intList
 import mu.KLogging
 import javax.persistence.Tuple
 import kotlin.properties.Delegates
@@ -31,8 +32,11 @@ class Derived: Base() {
         println("Derived.test()");
     }
 }
+interface Factory<T> {
+    fun create(): T
+}
 
-class Person(val map: MutableMap<String,String>, val historyList: ArrayList<Int> ) {
+class Person(val map: MutableMap<String,String>, val historyList: intList ) {
     var surname : String by map
     var name : String by map
     var age : Int by Delegates.observable({
@@ -40,5 +44,16 @@ class Person(val map: MutableMap<String,String>, val historyList: ArrayList<Int>
         0
     }()) {
         property, oldVal, newVal -> historyList.add(newVal)
+    }
+
+    companion object: Factory<Person> {
+        override fun create():Person { return  Person(mutableMapOf(
+            "name" to "",
+            "surname" to ""), intList())
+        }
+        fun createPerson(list: intList): Person  = Person(mutableMapOf(
+            "name" to "",
+            "surname" to "")
+            ,list)
     }
 }

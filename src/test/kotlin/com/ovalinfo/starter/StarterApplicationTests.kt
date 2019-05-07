@@ -29,10 +29,11 @@ class StarterApplicationTests {
 
     @Test
     fun delegateProps() {
+
         val base = Base()
         base.str = "Test"
         logger.debug(base.str)
-        val list: ArrayList<Int> = ArrayList()
+        val list: intList = ArrayList()
 
         val person = Person(
             mutableMapOf(
@@ -48,6 +49,9 @@ class StarterApplicationTests {
         logger.debug(person.age.toString())
 
         logger.debug("Change history " + list.toString())
+
+        logger.debug(Person.createPerson(list).name)
+
     }
 
     @Test
