@@ -2,6 +2,7 @@ package com.ovalinfo.starter
 
 import com.ovalinfo.starter.jms.TibcoJms
 import com.ovalinfo.starter.model.Animal
+import com.ovalinfo.starter.model.Base
 import mu.KLogging
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,6 +24,13 @@ class StarterApplicationTests {
 
     val queueName by lazy {
         cachingConnectionFactoryCA.toString()
+    }
+
+    @Test
+    fun delegateProps() {
+        val base = Base()
+        base.str = "Test"
+        logger.debug(base.str)
     }
 
     @Test
