@@ -2,6 +2,7 @@ package com.ovalinfo.starter.model
 
 import mu.KLogging
 import javax.persistence.Tuple
+import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
 class DoAdditionProcess<T>(var _value: T) {
@@ -31,7 +32,13 @@ class Derived: Base() {
     }
 }
 
-class Person(val map: MutableMap<String,String> ) {
+class Person(val map: MutableMap<String,String>, val historyList: ArrayList<Int> ) {
     var surname : String by map
     var name : String by map
+    var age : Int by Delegates.observable({
+        historyList.add(0)
+        0
+    }()) {
+        property, oldVal, newVal -> historyList.add(newVal)
+    }
 }

@@ -3,6 +3,7 @@ package com.ovalinfo.starter
 import com.ovalinfo.starter.jms.TibcoJms
 import com.ovalinfo.starter.model.Animal
 import com.ovalinfo.starter.model.Base
+import com.ovalinfo.starter.model.Person
 import mu.KLogging
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,6 +32,22 @@ class StarterApplicationTests {
         val base = Base()
         base.str = "Test"
         logger.debug(base.str)
+        val list: ArrayList<Int> = ArrayList()
+
+        val person = Person(
+            mutableMapOf(
+            "name" to "test",
+            "surname" to "tester")
+            ,list
+        )
+
+        logger(person.toString())
+        person.age = 5
+        person.age = 55
+        person.age = 555
+        logger.debug(person.age.toString())
+
+        logger.debug("Change history " + list.toString())
     }
 
     @Test
