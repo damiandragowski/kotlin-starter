@@ -28,15 +28,24 @@ sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
+    maven {
+        url 'http://maven.icm.edu.pl/artifactory/repo/'
+    }
+    maven {
+        url 'http://repository.openmindonline.it/'
+    }
+
     //flatDir {
      //   dirs '/opt/tibco/ems/8.4/lib/'
     //}
 }
 
 task gencxf {
-    ext.sourcesDir = "${buildDir}/generated-sources/cxf"
-    ext.classesDir = "${buildDir}/classes/cxf"
-    ext.schemaDir = "${projectDir}/src/main/resources/wsdl"
+    def unixProjectDir = projectDir.toString().replace('\\','/')
+    def unixBuildDir = buildDir.toString().replace('\\','/')
+    ext.sourcesDir = "${unixBuildDir}/generated-sources/cxf"
+    ext.classesDir = "${unixBuildDir}/classes/cxf"
+    ext.schemaDir = "${unixProjectDir}/src/main/resources/wsdl"
 
     outputs.dir classesDir
 
@@ -103,7 +112,9 @@ dependencies {
     implementation 'org.apache.cxf:cxf-rt-transports-jms:3.0.4'
     implementation 'com.sun.xml.bind:jaxb-xjc:2.1.7'
     implementation(files(gencxf.classesDir).builtBy(gencxf))
-    implementation group: 'com.tibco', name: 'tibjms', version: '4.4.3'
+    // https://mvnrepository.com/artifact/tibco-ems/tibjms
+    implementation group: 'tibco-ems', name: 'tibjms', version: '4.1'
+
     //implementation name: 'tibjms'
     implementation "io.github.microutils:kotlin-logging:1.4"
 
