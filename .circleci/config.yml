@@ -8,7 +8,7 @@ jobs:
       - run:
           name: Build
           command: |
-            ./gradlew build
+            ./gradlew clean build
       - run:
           name: Build
           command: |

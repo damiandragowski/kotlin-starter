@@ -4,7 +4,7 @@ jdk:
 before_script:
   - chmod +x gradlew
 script:
-  - ./gradlew build
+  - ./gradlew clean build
   - ./gradlew test
   - ./gradlew jacocoTestReport
 after_success:
