@@ -6,6 +6,8 @@ import javax.persistence.Tuple
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
+typealias foldFun<A,V> = (A,V) -> A
+
 class DoAdditionProcess<T>(var _value: T) {
     companion object : KLogging()
 

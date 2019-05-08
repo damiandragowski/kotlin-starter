@@ -4,6 +4,7 @@ import com.ovalinfo.starter.jms.TibcoJms
 import com.ovalinfo.starter.model.Animal
 import com.ovalinfo.starter.model.Base
 import com.ovalinfo.starter.model.Person
+import com.ovalinfo.starter.model.foldFun
 import mu.KLogging
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -12,6 +13,7 @@ import org.springframework.jms.connection.CachingConnectionFactory
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.context.web.WebAppConfiguration
+import java.lang.StringBuilder
 
 @RunWith(SpringRunner::class)
 @ContextConfiguration(classes = [(TibcoJms::class)])
@@ -25,6 +27,17 @@ class StarterApplicationTests {
 
     val queueName by lazy {
         cachingConnectionFactoryCA.toString()
+    }
+
+    @Test
+    fun labmdasTest() {
+        val foldFunImpl : foldFun<StringBuilder, Int> = { arr, value ->
+            arr.append(value)
+            arr
+        }
+
+        val list = listOf(7,6,5,4,3,2,1)
+        logger.debug(list.fold(StringBuilder(), foldFunImpl).toString())
     }
 
     @Test
