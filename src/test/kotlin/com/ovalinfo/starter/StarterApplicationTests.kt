@@ -34,6 +34,7 @@ class StarterApplicationTests {
         }
     }
 
+
     @Test
     fun labmdasTest() {
         val foldFunImpl : foldFun<StringBuilder, Int> = { arr, value ->
@@ -44,6 +45,14 @@ class StarterApplicationTests {
         val list = listOf(7,6,5,4,3,2,1)
         logger.debug(list.fold(StringBuilder(), foldFunImpl).toString())
         Test123()()
+        val powy: Double.(Int) -> Double = { it ->
+            var a = 1.0
+            repeat(it) { a *= this }
+            a
+        }
+        logger.debug("outcome " + 2.0.powy(8))
+        logger.debug("outcome " + powy(2.0, 8))
+        logger.debug("outcome " + powy.invoke(2.0, 8))
     }
 
     @Test
