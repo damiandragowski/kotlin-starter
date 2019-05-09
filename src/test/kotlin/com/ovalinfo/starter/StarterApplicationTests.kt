@@ -28,6 +28,11 @@ class StarterApplicationTests {
     val queueName by lazy {
         cachingConnectionFactoryCA.toString()
     }
+    class Test123:()->Unit {
+        override operator fun invoke(): Unit {
+            logger.debug("Test123")
+        }
+    }
 
     @Test
     fun labmdasTest() {
@@ -38,6 +43,7 @@ class StarterApplicationTests {
 
         val list = listOf(7,6,5,4,3,2,1)
         logger.debug(list.fold(StringBuilder(), foldFunImpl).toString())
+        Test123()()
     }
 
     @Test
