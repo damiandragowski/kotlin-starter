@@ -83,7 +83,7 @@ class StarterApplicationTests {
     }
 
     @Test
-    fun contextLoads() {
+    fun forTestsLetAlso() {
         val m = mapOf("key1" to 1, "key2" to 2, "key3" to 3)
         val l = listOf(2, 2, 3, 5, 5)
         for ((k, v) in m) {
@@ -111,7 +111,16 @@ class StarterApplicationTests {
     }
 
     @Test
-    fun `Some class test` () {
+    fun `Inner Loop, Outer Loop breaking example` () {
+
+        var s2 = 1
+        outerLoop@ for ( i in 1..5 )
+            innerLook@ for ( j in 1..5 ) {
+                if ( i == 2 ) break@outerLoop
+                s2 = s2 shl 1
+            }
+        logger.debug(s2.toString())
+
         val s = SomeClass()
         val s1 = if (s.str.startsWith("H")) {
             println("if statement")
@@ -125,20 +134,12 @@ class StarterApplicationTests {
 
         val a:Short = 1 shl 2
         logger.debug(a.toString())
-        var s2 = 1
-        outerLoop@ for ( i in 1..5 )
-            innerLook@ for ( j in 1..5 ) {
-                if ( i == 2 ) break@outerLoop
-                s2 = s2 shl 1
-            }
-        logger.debug(s2.toString())
 
 
         val l1 = listOf(9,8,7,6,5,4,3,2,1)
 
         l1.forEach label@{
             if (it > 6) return@label
-
         }
 
         val testClassProperties = TestClassProperties(1,2)
