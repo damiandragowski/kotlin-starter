@@ -8,6 +8,14 @@ import kotlin.reflect.KProperty
 
 typealias foldFun<A,V> = (A,V) -> A
 
+fun <A,V> Collection<V>.comb(accumulator: A, function: ((A,V)->A) ): A {
+    var result = accumulator
+    for ( t in this) {
+        result = function(result,t)
+    }
+    return result
+}
+
 class DoAdditionProcess<T>(var _value: T) {
     companion object : KLogging()
 

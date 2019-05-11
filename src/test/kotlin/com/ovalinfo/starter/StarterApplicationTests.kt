@@ -1,10 +1,7 @@
 package com.ovalinfo.starter
 
 import com.ovalinfo.starter.jms.TibcoJms
-import com.ovalinfo.starter.model.Animal
-import com.ovalinfo.starter.model.Base
-import com.ovalinfo.starter.model.Person
-import com.ovalinfo.starter.model.foldFun
+import com.ovalinfo.starter.model.*
 import mu.KLogging
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -42,7 +39,7 @@ class StarterApplicationTests {
             arr
         }
 
-        val list = listOf(7,6,5,4,3,2,1)
+        val list = listOf(10,9,8,7,6,5,4,3,2,1)
         logger.debug(list.fold(StringBuilder(), foldFunImpl).toString())
         Test123()()
         val powy: Double.(Int) -> Double = { it ->
@@ -53,6 +50,8 @@ class StarterApplicationTests {
         logger.debug("outcome " + 2.0.powy(8))
         logger.debug("outcome " + powy(2.0, 8))
         logger.debug("outcome " + powy.invoke(2.0, 8))
+
+        logger.debug("outcome " + list.comb(100,function = { acc, value -> acc - value } ) )
     }
 
     @Test
