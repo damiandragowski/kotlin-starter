@@ -1,8 +1,8 @@
 package com.ovalinfo.starter.model
 
 import com.ovalinfo.starter.intList
+import mu.KLogger
 import mu.KLogging
-import javax.persistence.Tuple
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
@@ -14,6 +14,19 @@ fun <A,V> Collection<V>.comb(accumulator: A, function: ((A,V)->A) ): A {
         result = function(result,t)
     }
     return result
+}
+
+fun KLogger.debug(i : Int): Unit = this.debug("{}", i)
+
+val  myAdd1:  MutableCollection<Int>.(Int) -> Boolean = { it -> add(it) }
+
+fun <T> MutableCollection<T>.myAdd2(t :T): Boolean = this.add(t)
+
+fun sequence(seed: Int): (()->Int) {
+    var seq: Int = seed
+    return { seq++
+        seq
+    }
 }
 
 class DoAdditionProcess<T>(var _value: T) {

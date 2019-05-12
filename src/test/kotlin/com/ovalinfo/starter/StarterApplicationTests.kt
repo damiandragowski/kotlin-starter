@@ -34,12 +34,12 @@ class StarterApplicationTests {
 
     @Test
     fun labmdasTest() {
-        val foldFunImpl : foldFun<StringBuilder, Int> = { arr, value ->
+        val foldFunImpl: foldFun<StringBuilder, Int> = { arr, value ->
             arr.append(value)
             arr
         }
 
-        val list = listOf(10,9,8,7,6,5,4,3,2,1)
+        val list = listOf(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
         logger.debug(list.fold(StringBuilder(), foldFunImpl).toString())
         Test123()()
         val powy: Double.(Int) -> Double = { it ->
@@ -51,7 +51,19 @@ class StarterApplicationTests {
         logger.debug("outcome " + powy(2.0, 8))
         logger.debug("outcome " + powy.invoke(2.0, 8))
 
-        logger.debug("outcome " + list.comb(100,function = { acc, value -> acc - value } ) )
+        logger.debug("outcome " + list.comb(100, function = { acc, value -> acc - value }))
+
+        val genFromTen = sequence(10)
+        val genFromHundred = sequence(100)
+        repeat(10) {
+            logger.debug("seq: " + genFromTen())
+            logger.debug("seq: " + genFromHundred())
+        }
+        val list2 = mutableListOf<Int>(1, 2, 3, 4, 5, 6, 7)
+        list2.myAdd1(8)
+        list2.forEach({ it -> logger.debug(it) })
+        list2.myAdd2(10)
+        list2.forEach({ it -> logger.debug(it) })
     }
 
     @Test
