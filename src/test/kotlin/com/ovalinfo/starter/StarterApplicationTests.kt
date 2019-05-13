@@ -31,7 +31,6 @@ class StarterApplicationTests {
         }
     }
 
-
     @Test
     fun labmdasTest() {
         val foldFunImpl: foldFun<StringBuilder, Int> = { arr, value ->
@@ -64,6 +63,8 @@ class StarterApplicationTests {
         list2.forEach({ it -> logger.debug(it) })
         list2.myAdd2(10)
         list2.forEach({ it -> logger.debug(it) })
+
+
     }
 
     @Test
@@ -163,8 +164,13 @@ class StarterApplicationTests {
         logger.debug("bit size " + l2.bitsize)
 
         DispatchSomeClass().callTest2(SomeClass())
-        val anim = Animal(nickname = "bob", age = 10)
-        logger.debug(anim.toString())
+        val anim1 = Animal(nickname = "bob", age = 10)
+        val anim2 = Animal(nickname = "boby", age = 10)
+        logger.debug(anim1.toString())
+        logger.debug((anim1+anim2).toString())
+        val (a1, a2) = anim1
+        logger.debug(a1)
+        logger.debug(a2)
         test(BootClass.ClassicBoot("jagged"))
         logger.debug ( "" + fact(5))
 
