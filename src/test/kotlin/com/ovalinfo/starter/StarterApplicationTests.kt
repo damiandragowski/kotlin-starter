@@ -32,6 +32,15 @@ class StarterApplicationTests {
     }
 
     @Test
+    fun operatorTest() {
+        val v1 = Vector2D(10,10)
+        val v2 = Vector2D(3,4)
+        logger.debug((v1+v2).toString())
+        logger.debug((v1*v2))
+        logger.debug(v2.perpendicular().toString())
+    }
+
+    @Test
     fun labmdasTest() {
         val foldFunImpl: foldFun<StringBuilder, Int> = { arr, value ->
             arr.append(value)
