@@ -38,6 +38,9 @@ class StarterApplicationTests {
         logger.debug((v1+v2).toString())
         logger.debug((v1*v2))
         logger.debug(v2.perpendicular().toString())
+        logger.debug(v2[0])
+        logger.debug(v2[1])
+        logger.debug(v1(v2))
     }
 
     @Test
