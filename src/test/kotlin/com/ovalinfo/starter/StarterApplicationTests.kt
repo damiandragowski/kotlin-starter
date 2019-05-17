@@ -10,6 +10,8 @@ import org.springframework.jms.connection.CachingConnectionFactory
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.context.web.WebAppConfiguration
+import java.lang.Exception
+import java.lang.NullPointerException
 import java.lang.StringBuilder
 
 @RunWith(SpringRunner::class)
@@ -28,6 +30,23 @@ class StarterApplicationTests {
     class Test123:()->Unit {
         override operator fun invoke(): Unit {
             logger.debug("Test123")
+        }
+    }
+
+    @Test
+    fun nullable() {
+        val l = listOf<String?>("DDR", null, "AWL")
+        for ( n in l) {
+            n?.let { logger.debug(it) }
+            n.let { logger.debug(it?.length?:0) }
+        }
+
+        val notNofl = l.filterNotNull()
+        try {
+            logger.debug(l[1])
+        } catch (e: Exception) {
+            logger.debug ("NPE occures")
+
         }
     }
 
