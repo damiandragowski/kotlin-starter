@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.context.web.WebAppConfiguration
 import java.lang.Exception
+import java.lang.IllegalStateException
 import java.lang.NullPointerException
 import java.lang.StringBuilder
 
@@ -48,6 +49,15 @@ class StarterApplicationTests {
             logger.debug ("NPE occures")
 
         }
+        try {
+            for (n in l) {
+                val newN = n?.length ?: failToGet("no value")
+                logger.debug(newN)
+            }
+        }catch(e: IllegalStateException) {
+
+        }
+
     }
 
     @Test

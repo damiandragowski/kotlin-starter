@@ -3,6 +3,7 @@ package com.ovalinfo.starter.model
 import com.ovalinfo.starter.intList
 import mu.KLogger
 import mu.KLogging
+import java.lang.IllegalStateException
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
@@ -79,4 +80,8 @@ class Person(val map: MutableMap<String,String>, val historyList: intList ) {
             "surname" to "")
             ,list)
     }
+}
+
+fun failToGet(str : String):Nothing {
+    throw IllegalStateException(str)
 }
