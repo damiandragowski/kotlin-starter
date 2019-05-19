@@ -35,6 +35,13 @@ class StarterApplicationTests {
     }
 
     @Test
+    fun annotationTest() {
+        val v1 = Vector2D(10,10)
+        val v2 = Vector2D(3,4)
+        logger.debug((v1-v2).toString())
+    }
+
+    @Test
     fun nullable() {
         val l = listOf<String?>("DDR", null, "AWL")
         for ( n in l) {
