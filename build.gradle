@@ -14,6 +14,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'idea'
 apply plugin: 'kotlin'
 apply plugin: 'jacoco'
+apply plugin: 'kotlin-kapt'
 
 jacocoTestReport {
     reports {
@@ -26,6 +27,14 @@ group = 'com.ovalinfo'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+
 repositories {
     mavenCentral()
     maven {
@@ -34,7 +43,7 @@ repositories {
     maven {
         url 'http://repository.openmindonline.it/'
     }
-
+    google()
     //flatDir {
      //   dirs '/opt/tibco/ems/8.4/lib/'
     //}
@@ -96,6 +105,11 @@ task gencxf {
 
 
 dependencies {
+    // annotation in compile time
+    compileOnly project(path: ':annotations')
+    kapt project(':processors')
+
+
     wsdl 'org.apache.cxf:cxf-tools:3.0.4'
     wsdl 'org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:3.0.4'
     wsdl 'org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:3.0.4'
@@ -144,6 +158,7 @@ dependencies {
     testImplementation 'org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:3.0.4'
     testImplementation 'org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:3.0.4'
     testImplementation 'org.apache.cxf:cxf-rt-transports-jms:3.0.4'
+    testImplementation 'junit:junit:4.12'
 }
 
 compileKotlin {
@@ -162,6 +177,14 @@ compileTestKotlin {
 
 task afterEclipseImport {
     dependsOn gencxf
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "${buildDir.absolutePath}/generated/source/kaptKotlin/"
+        }
+    }
 }
 
 jar {
