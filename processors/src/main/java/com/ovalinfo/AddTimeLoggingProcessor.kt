@@ -18,7 +18,7 @@ class AddTimeLoggingProcessor : AbstractProcessor() {
                 processingEnv.messager.printMessage(javax.tools.Diagnostic.Kind.ERROR,"improper use of annotation")
                 return false
             }
-
+            processingEnv.messager.printMessage(javax.tools.Diagnostic.Kind.WARNING,"Adding annotation method")
             addLogging(processingEnv.elementUtils.getPackageOf(it).toString())
         }
 
