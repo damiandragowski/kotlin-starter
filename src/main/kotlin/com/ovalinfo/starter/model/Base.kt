@@ -85,3 +85,42 @@ class Person(val map: MutableMap<String,String>, val historyList: intList ) {
 fun failToGet(str : String):Nothing {
     throw IllegalStateException(str)
 }
+
+fun <T> Collection<T>.partitionTo(a: MutableCollection<T>,
+                                  b:  MutableCollection<T>,
+                                  comparer: (T)->Boolean):Pair<MutableCollection<T>, MutableCollection<T>> {
+    for ( aa in this) {
+        if ( comparer(aa) ) {
+            a.add(aa)
+        } else {
+            b.add(aa)
+        }
+    }
+    return Pair(a,b)
+}
+
+fun <T> T.myApply(f: T.() -> Unit): T { return this.apply(f) }
+
+fun createString(): String {
+    return StringBuilder().myApply {
+        append("Numbers: ")
+        for (i in 1..10) {
+            append(i)
+        }
+    }.toString()
+}
+
+fun buildMap(f: MutableMap<Int, String>.() -> Unit):MutableMap<Int, String> {
+    val h:MutableMap<Int, String> = mutableMapOf()
+    h.f()
+    return h
+}
+
+fun usage(): Map<Int, String> {
+    return buildMap {
+        put(0, "0")
+        for (i in 1..10) {
+            put(i, "$i")
+        }
+    }
+}
