@@ -20,6 +20,7 @@ fun <A,V> Collection<V>.comb(accumulator: A, function: ((A,V)->A) ): A {
 fun KLogger.debug(i : Int): Unit = this.debug("{}", i)
 
 val  myAdd1:  MutableCollection<Int>.(Int) -> Boolean = { it -> add(it) }
+// val  myAdd2: <reified T> MutableCollection<T>.(T) -> Boolean = { it -> add(it) }
 
 fun <T> MutableCollection<T>.myAdd2(t :T): Boolean = this.add(t)
 
