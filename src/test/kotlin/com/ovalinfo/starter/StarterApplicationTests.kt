@@ -39,7 +39,7 @@ class StarterApplicationTests {
         val c = cloud {
             it.name = "AWS"
         }
-        //logger.debug(c)
+        logger.debug(c)
     }
 
     @Test
