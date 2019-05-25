@@ -35,14 +35,6 @@ class StarterApplicationTests {
     }
 
     @Test
-    fun simpleDslTest() {
-        val c = cloud {
-            it.name = "AWS"
-        }
-        logger.debug(c)
-    }
-
-    @Test
     fun annotationTest() {
         val v1 = Vector2D(10,10)
         val v2 = Vector2D(3,4)
