@@ -12,12 +12,6 @@ fun virtualMachine(block: (VirtualMachine) -> Unit):VirtualMachine {
     return result
 }
 
-fun cloud(block: (Cloud) -> Unit):Cloud {
-    val result = Cloud()
-    block(result)
-    return result
-}
+fun cloud(block: (Cloud) -> Unit) = Cloud().apply(block)
 
-fun KLogger.debug(c:Cloud) {
-    debug("{} : {}", c.name, c.vmList.joinToString { it.name })
-}
+fun KLogger.debug(c:Cloud)=debug("{} : {}", c.name, c.vmList.joinToString { it.name })
