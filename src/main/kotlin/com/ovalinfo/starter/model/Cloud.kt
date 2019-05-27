@@ -4,7 +4,7 @@ import mu.KLogger
 
 data class VirtualMachine(var name:String = "", var cpu: Int = 0)
 
-data class Cloud (var name: String="", var vmList: MutableList<VirtualMachine> = mutableListOf())
+data class Cloud (var name: String="", var vm: VirtualMachine? = null)
 
 fun virtualMachine(block: (VirtualMachine) -> Unit):VirtualMachine {
     val result = VirtualMachine()
@@ -14,4 +14,4 @@ fun virtualMachine(block: (VirtualMachine) -> Unit):VirtualMachine {
 
 fun cloud(block: (Cloud) -> Unit) = Cloud().apply(block)
 
-fun KLogger.debug(c:Cloud)=debug("{} : {}", c.name, c.vmList.joinToString { it.name })
+fun KLogger.debug(c:Cloud)=debug("{} : {} with {} cpus", c.name, c.vm?.name, c.vm?.cpu)
