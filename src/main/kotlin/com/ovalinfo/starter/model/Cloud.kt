@@ -6,11 +6,7 @@ data class VirtualMachine(var name:String = "", var cpu: Int = 0)
 
 data class Cloud (var name: String="", var vm: VirtualMachine? = null)
 
-fun virtualMachine(block: (VirtualMachine) -> Unit):VirtualMachine {
-    val result = VirtualMachine()
-    block(result)
-    return result
-}
+fun virtualMachine(block: (VirtualMachine) -> Unit) = VirtualMachine().apply(block)
 
 fun cloud(block: (Cloud) -> Unit) = Cloud().apply(block)
 
