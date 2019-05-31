@@ -2,7 +2,7 @@ package com.ovalinfo.starter
 
 import com.ovalinfo.starter.model.cloud
 import com.ovalinfo.starter.model.debug
-import com.ovalinfo.starter.model.virtualMachine
+import com.ovalinfo.starter.model.vm
 import mu.KLogging
 import org.junit.Test
 
@@ -14,7 +14,7 @@ class OtherTests {
     fun simpleDslTest() {
         val c = cloud {
             name = "AWS"
-            virtualMachine {
+            vm {
                 name = "vm1"
                 cpu = 10
             }
