@@ -8,6 +8,6 @@ data class Cloud (var name: String="", var vm: VirtualMachine? = null)
 
 fun cloud(block: Cloud.() -> Unit) = Cloud().apply(block)
 
-fun Cloud.vm(block: VirtualMachine.() -> Unit) = { vm = VirtualMachine().apply(block) }
+fun Cloud.vm(block: VirtualMachine.() -> Unit)  { vm = VirtualMachine().apply(block) }
 
 fun KLogger.debug(c:Cloud)=debug("{} : {} with {} cpus", c.name, c.vm?.name, c.vm?.cpu)
