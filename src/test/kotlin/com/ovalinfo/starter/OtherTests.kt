@@ -2,7 +2,6 @@ package com.ovalinfo.starter
 
 import com.ovalinfo.starter.model.cloud
 import com.ovalinfo.starter.model.debug
-import com.ovalinfo.starter.model.vm
 import mu.KLogging
 import org.junit.Test
 

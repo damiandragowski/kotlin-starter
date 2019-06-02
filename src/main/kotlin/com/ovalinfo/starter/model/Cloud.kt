@@ -2,12 +2,21 @@ package com.ovalinfo.starter.model
 
 import mu.KLogger
 
-data class VirtualMachine(var name:String = "", var cpu: Int = 0)
+data class VirtualMachine(val name:String, val cpu: Int)
+class VirtualMachineBuilder {
+    var name :String = ""
+    var cpu : Int = 0
+    fun build() : VirtualMachine = VirtualMachine(name, cpu)
+}
+fun cloud(block: CloudBuilder.() -> Unit) = CloudBuilder().apply(block).build()
 
-data class Cloud (var name: String="", var vm: VirtualMachine? = null)
+data class Cloud (val name: String, val vm: VirtualMachine?)
+class CloudBuilder {
+    var name :String = ""
+    private var vm : VirtualMachine? = null
 
-fun cloud(block: Cloud.() -> Unit) = Cloud().apply(block)
-
-fun Cloud.vm(block: VirtualMachine.() -> Unit)  { vm = VirtualMachine().apply(block) }
+    fun vm(block: VirtualMachineBuilder.() -> Unit)  { vm = VirtualMachineBuilder().apply(block).build() }
+    fun build() : Cloud = Cloud(name, vm)
+}
 
 fun KLogger.debug(c:Cloud)=debug("{} : {} with {} cpus", c.name, c.vm?.name, c.vm?.cpu)
