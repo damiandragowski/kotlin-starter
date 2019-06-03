@@ -10,13 +10,13 @@ class VirtualMachineBuilder {
 }
 fun cloud(block: CloudBuilder.() -> Unit) = CloudBuilder().apply(block).build()
 
-data class Cloud (val name: String, val vm: VirtualMachine?)
+data class Cloud (val name: String, val vmList: List<VirtualMachine>)
 class CloudBuilder {
     var name :String = ""
-    private var vm : VirtualMachine? = null
+    private val vmList  = mutableListOf<VirtualMachine>()
 
-    fun vm(block: VirtualMachineBuilder.() -> Unit)  { vm = VirtualMachineBuilder().apply(block).build() }
-    fun build() : Cloud = Cloud(name, vm)
+    fun vm(block: VirtualMachineBuilder.() -> Unit)  { vmList.add(VirtualMachineBuilder().apply(block).build()) }
+    fun build() : Cloud = Cloud(name, vmList)
 }
 
-fun KLogger.debug(c:Cloud)=debug("{} : {} with {} cpus", c.name, c.vm?.name, c.vm?.cpu)
+fun KLogger.debug(c:Cloud)=debug("{} : {}", c.name, c.vmList.joinToString { it.name + " with cpu " + it.cpu })
