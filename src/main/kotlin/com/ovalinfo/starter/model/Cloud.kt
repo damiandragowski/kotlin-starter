@@ -10,12 +10,18 @@ class VirtualMachineBuilder {
 }
 fun cloud(block: CloudBuilder.() -> Unit) = CloudBuilder().apply(block).build()
 
+class VMS:ArrayList<VirtualMachine>() {
+    fun vm(block: VirtualMachineBuilder.() -> Unit) {
+        add(VirtualMachineBuilder().apply(block).build())
+    }
+}
+
 data class Cloud (val name: String, val vmList: List<VirtualMachine>)
 class CloudBuilder {
     var name :String = ""
     private val vmList  = mutableListOf<VirtualMachine>()
 
-    fun vm(block: VirtualMachineBuilder.() -> Unit)  { vmList.add(VirtualMachineBuilder().apply(block).build()) }
+    fun vms(block: VMS.() -> Unit)  { VMS().apply(block) }
     fun build() : Cloud = Cloud(name, vmList)
 }
 

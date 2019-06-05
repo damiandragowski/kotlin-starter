@@ -13,17 +13,19 @@ class OtherTests {
     fun simpleDslTest() {
         val c = cloud {
             name = "AWS"
-            vm {
-                name = "vm1"
-                cpu = 10
-            }
-            vm {
-                name = "vm2"
-                cpu = 8
-            }
-            vm {
-                name = "vmware1"
-                cpu = 4
+            vms {
+                vm {
+                    name = "vm1"
+                    cpu = 10
+                }
+                vm {
+                    name = "vm2"
+                    cpu = 8
+                }
+                vm {
+                    name = "vmware1"
+                    cpu = 4
+                }
             }
         }
         logger.debug(c)
