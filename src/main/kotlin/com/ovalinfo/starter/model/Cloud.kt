@@ -21,7 +21,7 @@ class CloudBuilder {
     var name :String = ""
     private val vmList  = mutableListOf<VirtualMachine>()
 
-    fun vms(block: VMS.() -> Unit)  { VMS().apply(block) }
+    fun vms(block: VMS.() -> Unit)  { vmList.addAll(VMS().apply(block)) }
     fun build() : Cloud = Cloud(name, vmList)
 }
 
