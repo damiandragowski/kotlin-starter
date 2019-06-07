@@ -1,8 +1,13 @@
 package com.ovalinfo.starter.model
 
 import mu.KLogger
+@DslMarker
+annotation class vmDSL
+
 
 data class VirtualMachine(val name:String, val cpu: Int)
+
+@vmDSL
 class VirtualMachineBuilder {
     var name :String = ""
     var cpu : Int = 0
@@ -10,6 +15,7 @@ class VirtualMachineBuilder {
 }
 fun cloud(block: CloudBuilder.() -> Unit) = CloudBuilder().apply(block).build()
 
+@vmDSL
 class VMS:ArrayList<VirtualMachine>() {
     fun vm(block: VirtualMachineBuilder.() -> Unit) {
         add(VirtualMachineBuilder().apply(block).build())
@@ -17,6 +23,8 @@ class VMS:ArrayList<VirtualMachine>() {
 }
 
 data class Cloud (val name: String, val vmList: List<VirtualMachine>)
+
+@vmDSL
 class CloudBuilder {
     var name :String = ""
     private val vmList  = mutableListOf<VirtualMachine>()
