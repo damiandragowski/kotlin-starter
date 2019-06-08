@@ -15,6 +15,7 @@ class OtherTests {
             name = "AWS"
             vms {
                 vm {
+                    this@cloud.name = "Sick"
                     name = "vm1"
                     cpu = 10
                 }
