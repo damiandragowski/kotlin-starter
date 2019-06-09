@@ -1,5 +1,7 @@
 package com.ovalinfo.starter.model
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import mu.KLogger
 @DslMarker
 annotation class vmDSL
@@ -34,3 +36,5 @@ class CloudBuilder {
 }
 
 fun KLogger.debug(c:Cloud)=debug("{} : {}", c.name, c.vmList.joinToString { it.name + " with cpu " + it.cpu })
+
+fun gson(block: GsonBuilder.() -> Unit): Gson = GsonBuilder().apply(block).create()
