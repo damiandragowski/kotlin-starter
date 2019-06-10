@@ -1,5 +1,7 @@
 package com.ovalinfo.starter.model
 
+import com.google.gson.ExclusionStrategy
+import com.google.gson.FieldAttributes
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import mu.KLogger
@@ -38,3 +40,35 @@ class CloudBuilder {
 fun KLogger.debug(c:Cloud)=debug("{} : {}", c.name, c.vmList.joinToString { it.name + " with cpu " + it.cpu })
 
 fun gson(block: GsonBuilder.() -> Unit): Gson = GsonBuilder().apply(block).create()
+
+class CustomStrategyBuilder {
+
+    private var field: (FieldAttributes) -> Boolean = { false }
+    private var clazz: (Class<*>) -> Boolean? = { false }
+
+    fun whenField(block: FieldAttributes.() -> Boolean) {
+        field = block
+    }
+
+    fun whenClass(block: Class<*>.() -> Boolean) {
+        clazz = block
+    }
+
+    fun build(): ExclusionStrategy {
+        return object : ExclusionStrategy {
+            override fun shouldSkipClass(clazz: Class<*>?): Boolean {
+                return clazz?.let { clazz(it) } ?: false
+            }
+
+            override fun shouldSkipField(f: FieldAttributes?): Boolean {
+                return f?.let { field(it) } ?: false
+            }
+
+        }
+    }
+}
+
+fun GsonBuilder.serializeExcept(block: CustomStrategyBuilder.() -> Unit) {
+    val strategy = CustomStrategyBuilder().apply(block).build()
+    this.addSerializationExclusionStrategy(strategy)
+}
