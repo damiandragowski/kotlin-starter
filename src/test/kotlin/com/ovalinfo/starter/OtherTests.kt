@@ -1,9 +1,6 @@
 package com.ovalinfo.starter
 
-import com.ovalinfo.starter.model.cloud
-import com.ovalinfo.starter.model.debug
-import com.ovalinfo.starter.model.gson
-import com.ovalinfo.starter.model.serializeExcept
+import com.ovalinfo.starter.model.*
 import mu.KLogging
 import org.junit.Test
 
@@ -33,8 +30,9 @@ class OtherTests {
         }
         logger.debug(gson {
             serializeExcept {
-                whenField { name == "cpu" }
+                whenClass { equals(VirtualMachine::class.java) }
             }
+            serializeNulls()
         }.toJson(c))
     }
 }
