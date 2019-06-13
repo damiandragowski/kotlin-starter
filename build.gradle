@@ -110,6 +110,9 @@ dependencies {
     kapt project(':processors')
 
 
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.71'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.71'
+
     wsdl 'org.apache.cxf:cxf-tools:3.0.4'
     wsdl 'org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:3.0.4'
     wsdl 'org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:3.0.4'
@@ -141,6 +144,7 @@ dependencies {
     implementation group: 'org.springframework', name: 'spring-test', version: '4.3.2.RELEASE'
     implementation group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxws', version: '3.0.4'
     implementation group: 'javax.jms', name: 'javax.jms-api', version: '2.0'
+
 
 
 
