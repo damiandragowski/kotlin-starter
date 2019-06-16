@@ -3,7 +3,6 @@ package com.ovalinfo.starter
 import com.ovalinfo.starter.model.*
 import mu.KLogging
 import org.junit.Test
-import kotlinx.coroutines.*
 
 class OtherTests {
 

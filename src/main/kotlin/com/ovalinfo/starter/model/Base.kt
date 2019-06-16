@@ -68,7 +68,7 @@ class Person(val map: MutableMap<String,String>, val historyList: intList ) {
         historyList.add(0)
         0
     }()) {
-        property, oldVal, newVal -> historyList.add(newVal)
+        _, _, newVal -> historyList.add(newVal)
     }
 
     companion object: Factory<Person> {

@@ -43,7 +43,7 @@ abstract class SomeClass2 : SomeClass() {
 
 // dispatch class for SomeClass extension reciever ,two test1 function, and use of this qualifier
 class DispatchSomeClass {
-    open fun test1() = println("test1 from dispatch class")
+    fun test1() = println("test1 from dispatch class")
     fun SomeClass.test2() {
         test1()
         this@DispatchSomeClass.test1()
