@@ -4,13 +4,13 @@ import com.ovalinfo.starter.model.*
 import mu.KLogging
 import org.junit.Test
 
+
 class OtherTests {
 
     companion object : KLogging()
 
     @Test
     fun runSimpleThread() {
-
     }
 
     @Test
