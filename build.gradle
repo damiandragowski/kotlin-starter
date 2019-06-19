@@ -1,5 +1,15 @@
 buildscript {
     ext.kotlin_version = '1.3.31'
+    repositories {
+        mavenCentral()
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+    }
 }
 
 
@@ -109,6 +119,7 @@ task gencxf {
 
 
 dependencies {
+    ext.kotlin_version = '1.3.31'
     // annotation in compile time
     compileOnly project(path: ':annotations')
     kapt project(':processors')
